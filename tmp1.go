@@ -4,8 +4,8 @@ type Targets []*Target
 
 type MonitoringObjects []struct {
 	Host           string
-	OverrideConfig NetboxConfigContext
-	Target         Target
+	OverrideConfig netbox.NetboxConfigContext
+	Targets        map[int]Target
 }
 
 type Target struct {
@@ -13,17 +13,7 @@ type Target struct {
 	Labels  TargetLabels `json:"labels"`
 	Metrics svcMetrics
 }
-type NetboxConfigContext struct {
-	Monitoring struct {
-		Services []struct {
-			Service struct {
-				Name     string `json:"name,omitempty"`
-				Port     int    `json:"port,omitempty"`
-				Disabled bool   `json:"disabled,omitempty"`
-			} `json:"service,omitempty"`
-		} `json:"services,omitempty"`
-	} `json:"monitoring,omitempty"`
-}
+
 type TargetLabels struct {
 	MetricsPath                          string `json:"__metrics_path__,omitempty"`
 	MetaNetboxIp                         string `json:"__meta_netbox_ip"`
